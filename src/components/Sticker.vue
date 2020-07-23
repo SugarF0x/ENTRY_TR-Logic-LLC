@@ -3,6 +3,10 @@
 
     <!-- DISPLAY MODE -->
     <div v-if="!edit">
+      <button class="destroy"
+              @click="destroy(sticker.id)"
+              title="Delete instance"
+      >X</button>
       <h3>{{ sticker.title }}</h3>
       <ul>
         <li v-for="(task, index) in sticker.tasks"
@@ -18,7 +22,7 @@
       <small v-if="sticker.tasks.length > 3">
         More...
       </small>
-      <button class="edit" @click="modify(sticker.id)">Edit</button>
+      <button class="edit" @click="modify">Edit</button>
     </div>
 
     <!-- EDIT MODE -->
@@ -84,8 +88,16 @@
           return el !== undefined
         });
       },
-      modify(id) {
-        this.$router.push('/' + id);
+      modify() {
+        this.$router.push('/' + this.sticker.id);
+      },
+      destroy() {
+        this.$store.commit('setStickers', this.$store.state.stickers.filter(el => {
+          return el.id !== this.sticker.id;
+        }));
+      },
+      create() {
+
       }
     }
   }
@@ -100,6 +112,7 @@
     display: inline-block;
     min-width: 10rem;
     text-align: left;
+    position: relative;
     .actions {
       display: flex;
       justify-content: space-between;
@@ -109,6 +122,13 @@
     }
     .edit {
       width: 100%;
+    }
+    .destroy {
+      position: absolute;
+      top: -0.7rem;
+      right: .5rem;
+      border-radius: 1rem;
+      font-size: 50%;
     }
     button {
       margin-top: 1rem;
