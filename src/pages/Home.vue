@@ -2,7 +2,10 @@
   <div class="home">
     <h1>This is home page</h1>
     <p>some text</p>
-    <Sticker data></Sticker>
+    <Sticker v-for="sticker in stickers"
+             :key="sticker.title"
+             :sticker="sticker"
+    />
   </div>
 </template>
 
@@ -20,6 +23,11 @@
     name: 'Home',
     components: {
       Sticker
+    },
+    computed: {
+      stickers() {
+        return this.$store.state.stickers;
+      }
     }
   }
 </script>

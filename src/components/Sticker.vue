@@ -52,6 +52,7 @@
     background-color: blanchedalmond;
     border-radius: 1rem;
     padding: 1rem;
+    margin: 1rem;
     display: inline-block;
     ul {
       padding-left: 0;
