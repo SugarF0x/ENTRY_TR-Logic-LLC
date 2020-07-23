@@ -20,6 +20,7 @@ new Vue({
 //   [
 //     {
 //       title: 'Dummy title 1',
+//       id: '1',
 //       tasks: [
 //         {
 //           state: false,
@@ -36,6 +37,7 @@ new Vue({
 //       ]
 //     },{
 //       title: 'Dummy title 2',
+//       id: '2',
 //       tasks: [
 //         {
 //           state: false,
@@ -52,6 +54,7 @@ new Vue({
 //       ]
 //     },{
 //       title: 'Dummy title 3',
+//       id: '3',
 //       tasks: [
 //         {
 //           state: false,
@@ -64,7 +67,19 @@ new Vue({
 //         {
 //           state: false,
 //           text:  'Dummy checkbox 3'
-//         }
+//         },
+//         {
+//           state: false,
+//           text:  'Dummy checkbox 4'
+//         },
+//         {
+//           state: false,
+//           text:  'Dummy checkbox 5'
+//         },
+//         {
+//           state: false,
+//           text:  'Dummy checkbox 6'
+//         },
 //       ]
 //     },
 //   ]

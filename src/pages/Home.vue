@@ -4,7 +4,9 @@
     <router-link to="/new">
       Add new task
     </router-link>
-    <div v-if="stickers.length">
+    <div v-if="stickers.length"
+         class="sticker-box"
+    >
       <Sticker v-for="sticker in stickers"
                :key="sticker.title"
                :sticker="sticker"
@@ -17,6 +19,8 @@
 </template>
 
 <script>
+  import Sticker from '../components/Sticker.vue'
+
   /**
    * Home page displaying all the Stickers
    *
@@ -24,8 +28,6 @@
    * @subcategory pages
    * @namespace home
    */
-  import Sticker from '../components/Sticker.vue'
-
   export default {
     name: 'Home',
     components: {
@@ -40,6 +42,13 @@
 </script>
 
 <style lang="less" scoped>
+  .sticker-box {
+    display: flex;
+    flex-flow: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: flex-start;
+  }
   a {
     color: inherit;
     text-decoration: inherit;
