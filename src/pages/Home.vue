@@ -1,10 +1,9 @@
 <template>
   <div class="home">
     <h1>Home</h1>
-    <label>
-      <button>Add</button>
-      new TODO list
-    </label>
+    <router-link to="/new">
+      Add new task
+    </router-link>
     <div v-if="stickers.length">
       <Sticker v-for="sticker in stickers"
                :key="sticker.title"
@@ -41,10 +40,16 @@
 </script>
 
 <style lang="less" scoped>
-  label {
+  a {
+    color: inherit;
+    text-decoration: inherit;
+    font-weight: bold;
     padding: 1rem;
     display: inline-block;
     background-color: whitesmoke;
     border-radius: 1rem;
+  }
+  a:hover {
+    background-color: #eaeaea;
   }
 </style>
