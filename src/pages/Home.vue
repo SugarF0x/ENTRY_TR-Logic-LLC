@@ -41,5 +41,10 @@
 </script>
 
 <style lang="less" scoped>
-
+  label {
+    padding: 1rem;
+    display: inline-block;
+    background-color: whitesmoke;
+    border-radius: 1rem;
+  }
 </style>
