@@ -1,11 +1,19 @@
 <template>
   <div class="home">
-    <h1>This is home page</h1>
-    <p>some text</p>
-    <Sticker v-for="sticker in stickers"
-             :key="sticker.title"
-             :sticker="sticker"
-    />
+    <h1>Home</h1>
+    <label>
+      <button>Add</button>
+      new TODO list
+    </label>
+    <div v-if="stickers.length">
+      <Sticker v-for="sticker in stickers"
+               :key="sticker.title"
+               :sticker="sticker"
+      />
+    </div>
+    <div v-else>
+      <h2>Looks like you dont have anything to do yet!</h2>
+    </div>
   </div>
 </template>
 
