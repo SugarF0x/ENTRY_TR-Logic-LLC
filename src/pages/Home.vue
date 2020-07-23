@@ -2,6 +2,7 @@
   <div class="home">
     <h1>This is home page</h1>
     <p>some text</p>
+    <Sticker data></Sticker>
   </div>
 </template>
 
@@ -13,8 +14,13 @@
    * @subcategory pages
    * @namespace home
    */
+  import Sticker from '../components/Sticker.vue'
+
   export default {
-    name: 'Home'
+    name: 'Home',
+    components: {
+      Sticker
+    }
   }
 </script>
 
