@@ -8,3 +8,6 @@ html {
 *,*::before,*::after {
     box-sizing: border-box;
 }
+li {
+    list-style: none;
+}
