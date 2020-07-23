@@ -1,32 +1,47 @@
 <template>
   <div id="app">
     <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
+      <h1>
+        TODO list for
+          <span class="cyan">TR Logic LLC</span>
+        by
+          <span class="cyan">Sugar_F0x</span>
+      </h1>
     </div>
     <router-view/>
   </div>
 </template>
 
+<script>
+  /**
+   * The cradle of this project
+   *
+   * @category client
+   * @subcategory root
+   * @namespace app
+   */
+  export default {
+    name: 'App'
+  }
+</script>
+
 <style lang="less">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
+  @import './assets/global.css';
 
-#nav {
-  padding: 30px;
-
-  a {
-    font-weight: bold;
+  #app {
+    font-family: Avenir, Helvetica, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-align: center; // this one centers it all !CAUTION!
     color: #2c3e50;
+  }
 
-    &.router-link-exact-active {
-      color: #42b983;
+  #nav {
+    padding: 1rem;
+    background-color: steelblue;
+    color: white;
+    .cyan {
+      color: cyan;
     }
   }
-}
 </style>
