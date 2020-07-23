@@ -2,7 +2,8 @@
   <div id="app">
     <div id="nav">
       <h1>
-        TODO list for
+          <router-link to="/" class="cyan">TODO</router-link>
+        list for
           <span class="cyan">TR Logic LLC</span>
         by
           <span class="cyan">Sugar_F0x</span>
