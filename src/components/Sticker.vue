@@ -25,20 +25,22 @@
     props: {
       sticker: {
         type: Object,
-        default: {
-          title: 'Default title',
-          tasks: [
-            {
-              state: false,
-              text: 'Default checkbox 1'
-            },{
-              state: false,
-              text: 'Default checkbox 2'
-            },{
-              state: false,
-              text: 'Default checkbox 3'
-            }
-          ]
+        default: () => {
+          return {
+            title: 'Default title',
+            tasks: [
+              {
+                state: false,
+                text: 'Default checkbox 1'
+              },{
+                state: false,
+                text: 'Default checkbox 2'
+              },{
+                state: false,
+                text: 'Default checkbox 3'
+              }
+            ]
+          }
         }
       }
     }
