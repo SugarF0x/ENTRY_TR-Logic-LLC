@@ -13,7 +13,7 @@ const routes = [
     component: Home
   },
   {
-    path: '/:sticker',
+    path: '/:id',
     name: 'About',
     component: Edit
   }

@@ -1,7 +1,7 @@
 <template>
   <div class="edit">
     <h1>This is an edit page</h1>
-    <h3>Here you can edit sticker #{{ sticker }}</h3>
+    <h3>Here you can edit sticker #{{ id }}</h3>
   </div>
 </template>
 
@@ -17,7 +17,7 @@
     name: 'Edit',
     data() {
       return {
-        sticker: this.$route.params.sticker
+        id: this.$route.params.id
       }
     }
   }
