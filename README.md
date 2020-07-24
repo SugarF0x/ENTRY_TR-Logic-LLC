@@ -18,6 +18,12 @@ npm run serve
 npm run build
 ```
 
+### Runs production build on Node
+###### remember to specify host in server.js
+```
+npm run prod
+```
+
 ## Commit syntax 
 
 * :blue_book: Documentation
