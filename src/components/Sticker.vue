@@ -143,6 +143,40 @@
    * @category client
    * @subcategory components
    * @namespace sticker
+   *
+   * @vue-prop {Object}   sticker               - Sticker data objects
+   * @vue-prop {String}   sticker.title         - Sticker title
+   * @vue-prop {String}   sticker.id            - Sticker id
+   * @vue-prop {Object[]} sticker.tasks         - Tasks object container
+   * @vue-prop {Boolean}  sticker.tasks[].state - Task checkbox state
+   * @vue-prop {String}   sticker.tasks[].text  - Task text
+   * @vue-prop {Boolean}  edit - Directs sticker editability
+   *
+   * @vue-data {Object}   dialog         - Dialog states container object
+   * @vue-data {Boolean}  dialog.destroy - Directs visibility of sticker deletion dialog window
+   * @vue-data {Boolean}  dialog.discard - Directs visibility of changes discard dialog window
+   * @vue-data {Object}   newData                - New data objects container
+   * @vue-data {String}   newData.title          - New sticker title
+   * @vue-data {String}   newData.id             - New sticker id
+   * @vue-data {Object[]} newData.tasks          - New tasks object container
+   * @vue-data {Boolean}  newData.tasks[].state  - New task checkbox state
+   * @vue-data {String}   newData.tasks[].text   - New task text
+   * @vue-data {Boolean}  newData.tasks[].exists - Directs deletion/recovery of tasks
+   * @vue-data {Object}   revertData       - Backup data storage object used for undoing changes
+   * @vue-data {String}   revertData.title - Backup sticker title
+   * @vue-data {String}   revertData.id    - Backup sticker id
+   * @vue-data {Object[]} revertData.tasks - Backup tasks object container
+   *
+   * @vue-event {Void} addTask()             - Create new task list item
+   * @vue-event {Void} discardTask({Number}) - Mark specified task list item for deletion
+   * @vue-event {Void} modify()              - Move over to this sticker's edit page
+   * @vue-event {Void} destroy()             - Delete this sticker from storage
+   * @vue-event {Void} update()              - Update storage with this sticker's new data and return home
+   * @vue-event {Void} toDestroy({Boolean})  - Prompt confirmation for this sticker's deletion
+   * @vue-event {Void} toDiscard({Boolean})  - Prompt confirmation for this sticker's new data discard
+   * @vue-event {Void} isModified({Number})  - Compare new sticker data with it's storage
+   * @vue-event {Void} undo({Number})        - Undo changes made to the field while retaining it's data
+   * @vue-event {Void} revert({Number})      - Apply data saved from undoing changes
    */
   export default {
     name: "Sticker",
@@ -229,6 +263,7 @@
           });
         else
           store.push(finalData);
+
         this.$store.commit('setStickers', store);
         this.$router.push('/');
       },

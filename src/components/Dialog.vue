@@ -16,7 +16,13 @@
    *
    * @category client
    * @subcategory components
-   * @namespace checkbox.dialog
+   * @namespace dialog
+   *
+   * @vue-prop {Boolean} display - Directs dialog visibility
+   * @vue-prop {String}  message - Text to be displayed in dialog window
+   *
+   * @vue-event {Boolean} abort   - Emit false as a decline
+   * @vue-event {Boolean} proceed - Emit true as a confirmation
    */
   export default {
     name: "Dialog",

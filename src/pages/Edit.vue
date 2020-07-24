@@ -26,6 +26,10 @@
    * @category client
    * @subcategory pages
    * @namespace edit
+   *
+   * @vue-data {String} id - Sticker id passed in route parameters
+   *
+   * @vue-computed {Object|Boolean} sticker() - Find sticker in storage by its id and return either it's object or FALSE if none is found
    */
   export default {
     name: 'Edit',

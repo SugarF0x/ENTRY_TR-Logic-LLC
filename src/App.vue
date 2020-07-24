@@ -21,6 +21,15 @@
    * @category client
    * @subcategory root
    * @namespace app
+   *
+   * @vue-data {Object[]} dummyData                 - Dummy data objects container
+   * @vue-data {String}   dummyData[].title         - Dummy sticker title
+   * @vue-data {String}   dummyData[].id            - Dummy sticker id
+   * @vue-data {Object[]} dummyData[].tasks         - Dummy tasks object container
+   * @vue-data {Boolean}  dummyData[].tasks[].state - Dummy task checkbox state
+   * @vue-data {String}   dummyData[].tasks[].text  - Dummy task text
+   *
+   * @vue-event {Void} fillDummyData() - Fill storage with dummy data for display purpose
    */
   export default {
     name: 'App',

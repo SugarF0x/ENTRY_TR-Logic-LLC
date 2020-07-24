@@ -27,6 +27,8 @@
    * @category client
    * @subcategory pages
    * @namespace home
+   *
+   * @vue-computed {Object[]} stickers() - Get stickers from storage
    */
   export default {
     name: 'Home',
