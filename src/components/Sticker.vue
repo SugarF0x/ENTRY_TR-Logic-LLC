@@ -146,10 +146,13 @@
     }
     .destroy {
       position: absolute;
-      top: -0.7rem;
-      right: .5rem;
+      top: -1.5rem;
+      right: -0.5rem;
+      height: 2rem;
+      width: 2rem;
+      cursor: pointer;
       border-radius: 1rem;
-      font-size: 50%;
+      border: .1rem solid white;
     }
     button {
       margin-top: 1rem;
