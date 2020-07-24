@@ -1,35 +1,3 @@
-// const http = require('http');
-// const fs = require('fs');
-// const httpPort = 80;
-//
-// http.createServer((req, res) => {
-//   fs.readFile('./dist/' + req.url, (err, data) => {
-//     if (!err) {
-//       let dotoffset = req.url.lastIndexOf('.');
-//       let mimetype = dotoffset === -1
-//         ? 'text/plain'
-//         : {
-//           '.html' : 'text/html; charset=utf-8',
-//           '.png'  : 'image/png',
-//           '.css'  : 'text/css',
-//           '.js'   : 'text/javascript'
-//         }[ req.url.substr(dotoffset) ];
-//       res.setHeader('Content-type' , mimetype);
-//       res.end(data);
-//     } else {
-//       fs.readFile('./dist/index.html', 'utf-8', (err, content) => {
-//         if (err) {
-//           console.log('We cannot open "index.html" file.')
-//         }
-//         res.writeHead(200, {'Content-Type': 'text/html; charset=utf-8'});
-//         res.end(content)
-//       })
-//     }
-//   });
-// }).listen(httpPort, () => {
-//   console.log('Server listening on: http://localhost:%s', httpPort)
-// });
-
 let path = require('path');
 let http = require('http');
 let fs = require('fs');
@@ -71,6 +39,6 @@ http.createServer((req, res) => {
       res.end(content)
     })
   });
-}).listen(80, () => {
-
+}).listen(8080, '192.168.1.42', () => {
+  console.log('Server listening on machine 42')
 });
