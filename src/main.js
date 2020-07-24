@@ -31,8 +31,7 @@ new Vue({
      *
      * @function
      */
-    let stickers = JSON.parse(localStorage.getItem('stickers')) || [];
-    this.$store.commit('setStickers', stickers);
+    this.$store.commit('setStickers', JSON.parse(localStorage.getItem('stickers')) || []);
   },
   render: h => h(App)
 }).$mount('#app');

@@ -304,7 +304,7 @@
         if (index === -1)
           return this.sticker.title !== this.newData.title;
         else if (index < this.sticker.tasks.length)
-          return (this.sticker.tasks[index].text !== this.newData.tasks[index].text
+          return (this.sticker.tasks[index].text  !== this.newData.tasks[index].text
                || this.sticker.tasks[index].state !== this.newData.tasks[index].state);
         else
           return false;
@@ -312,12 +312,13 @@
       undo(index) {
         if (index === -1) {
           this.revertData.title = this.newData.title;
-          this.newData.title = this.sticker.title;
+          this.newData.title    = this.sticker.title;
         }
         else {
-          this.revertData.tasks[index] = {};
+          this.revertData.tasks[index]        = {};
           this.revertData.tasks[index].text   = this.newData.tasks[index].text;
           this.revertData.tasks[index].state  = this.newData.tasks[index].state;
+
           this.newData.tasks[index].text  = this.sticker.tasks[index].text;
           this.newData.tasks[index].state = this.sticker.tasks[index].state || false;
         }

@@ -44,8 +44,7 @@
     computed: {
       sticker() {
         if (this.$store.state.stickers.length > 0) {
-          let stickers = this.$store.state.stickers;
-          stickers = stickers.filter(el => {return el.id === this.id});
+          let stickers = this.$store.state.stickers.filter(el => {return el.id === this.id});
           if (stickers.length)
             return stickers[0];
         }
