@@ -65,7 +65,7 @@
         <li v-for="(v,i) in newData.tasks">
           <label v-if="v.exists">
             <input type="checkbox"
-                   :checked="v.state"
+                   v-model="v.state"
             >
             <input placeholder="task"
                    v-model="v.text"
@@ -93,7 +93,7 @@
         <button @click="dialog.discard=true">
           Discard
         </button>
-        <button>
+        <button @click="update">
           Accept
         </button>
       </div>
@@ -122,7 +122,7 @@
         default: () => {
           return {
             title: '',
-            id: null,
+            id: Math.floor(Math.random()*100000).toString(),
             tasks: [
               {
                 state: false,
@@ -158,10 +158,6 @@
         this.newData.tasks.push({state: false, text: '', exists: true})
       },
       discardTask(index) {
-        // delete this.newData.tasks[index];
-        // this.sticker.tasks = this.sticker.tasks.filter( el => {
-        //   return el !== undefined
-        // });
         this.newData.tasks[index].exists = false;
       },
       modify() {
@@ -172,8 +168,31 @@
           return el.id !== this.sticker.id;
         }));
       },
-      create() {
+      update() {
+        let finalData = JSON.parse(JSON.stringify(this.newData));
+        finalData.tasks = finalData.tasks.map( entry => {
+          if (entry.exists) {
+            delete entry.exists;
+            return entry;
+          }
+        }).filter( entry => {
+          return entry !== undefined;
+        });
 
+        let store = JSON.parse(JSON.stringify(this.$store.state.stickers));
+        if (store.filter(entry => {
+          return entry.id === finalData.id;
+        }).length)
+          store = this.$store.state.stickers.map(entry => {
+            if (entry.id === finalData.id)
+              return finalData;
+            else
+              return entry;
+          });
+        else
+          store.push(finalData);
+        this.$store.commit('setStickers', store);
+        this.$router.push('/');
       },
       toDestroy(val) {
         this.dialog.destroy = false;
