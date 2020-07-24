@@ -28,6 +28,10 @@
 
     <!-- EDIT MODE -->
     <div v-else>
+      <button class="destroy"
+              @click="dialog = true"
+              title="Delete instance"
+      >X</button>
       <label>
         <input placeholder="title" v-model="sticker.title" style="width: 100%;">
       </label>
