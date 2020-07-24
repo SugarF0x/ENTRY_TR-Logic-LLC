@@ -1,10 +1,11 @@
 <template>
   <div class="sticker">
+    <Dialog :display="dialog" @proceed="proceed"></Dialog>
 
     <!-- DISPLAY MODE -->
     <div v-if="!edit">
       <button class="destroy"
-              @click="destroy(sticker.id)"
+              @click="dialog = true"
               title="Delete instance"
       >X</button>
       <h3>{{ sticker.title }}</h3>
@@ -51,6 +52,8 @@
 </template>
 
 <script>
+  import Dialog from './Dialog';
+
   /**
    * Sticker component containing TODOs' titles, checkboxes and whatnot
    *
@@ -60,6 +63,9 @@
    */
   export default {
     name: "Sticker",
+    components: {
+      Dialog
+    },
     props: {
       sticker: {
         type: Object,
@@ -77,6 +83,11 @@
         }
       },
       edit: Boolean
+    },
+    data() {
+      return {
+        dialog: false
+      }
     },
     methods: {
       addTask() {
@@ -98,6 +109,12 @@
       },
       create() {
 
+      },
+      proceed(val) {
+        this.dialog = false;
+        if (val) {
+          this.destroy()
+        }
       }
     }
   }
