@@ -1,9 +1,9 @@
 <template>
   <div class="sticker">
-    <Dialog :display="dialog" @proceed="proceed"></Dialog>
 
     <!-- DISPLAY MODE -->
     <div v-if="!edit">
+      <Dialog :display="dialog" @proceed="toDestroy"></Dialog>
       <button class="destroy"
               @click="dialog = true"
               title="Delete instance"
@@ -30,27 +30,33 @@
 
     <!-- EDIT MODE -->
     <div v-else>
+      <Dialog :display="dialog" @proceed="toDiscard"></Dialog>
       <button class="destroy"
               @click="dialog = true"
               title="Delete instance"
       >X</button>
       <label>
-        <input placeholder="title" v-model="sticker.title" style="width: 100%;">
+        <input placeholder="title"
+               v-model="newData.title"
+               style="width: 100%;"
+               :class="{ modified: isModified(-1) }"
+        >
       </label>
       <ul>
-        <li v-for="(v,i) in sticker.tasks">
-          <label>
+        <li v-for="(v,i) in newData.tasks">
+          <label v-if="v.exists">
             <input type="checkbox" :checked="v.state">
-            <input placeholder="task" v-model="v.text">
+            <input placeholder="task" v-model="v.text" :class="{ modified: isModified(i) }">
+            <button class="discard" @click="discardTask(i)">X</button>
           </label>
-          <button class="discard" @click="discardTask(i)">X</button>
+          <div v-else style="text-align: center; margin: .5rem 0;">Deleted. Restore?</div>
         </li>
-        <li>
+        <li style="text-align: center;">
           <button @click="addTask">Add task</button>
         </li>
       </ul>
       <div class="actions">
-        <button>Discard</button>
+        <button @click="dialog=true">Discard</button>
         <button>Accept</button>
       </div>
     </div>
@@ -92,18 +98,30 @@
     },
     data() {
       return {
-        dialog: false
+        dialog: false,
+        newData: {
+          title: this.sticker.title,
+          id:    this.sticker.id,
+          tasks: this.sticker.tasks.map(entry => {
+            return {
+              state:  entry.state,
+              text:   entry.text,
+              exists: true
+            }
+          })
+        }
       }
     },
     methods: {
       addTask() {
-        this.sticker.tasks.push({state: false, text: ''})
+        this.newData.tasks.push({state: false, text: '', exists: true})
       },
       discardTask(index) {
-        delete this.sticker.tasks[index];
-        this.sticker.tasks = this.sticker.tasks.filter( el => {
-          return el !== undefined
-        });
+        // delete this.newData.tasks[index];
+        // this.sticker.tasks = this.sticker.tasks.filter( el => {
+        //   return el !== undefined
+        // });
+        this.newData.tasks[index].exists = false;
       },
       modify() {
         this.$router.push('/' + this.sticker.id);
@@ -116,11 +134,39 @@
       create() {
 
       },
-      proceed(val) {
+      toDestroy(val) {
         this.dialog = false;
         if (val) {
           this.destroy()
         }
+      },
+      toDiscard(val) {
+        this.dialog = false;
+        if (val) {
+          this.newData = {
+            title: this.sticker.title,
+            id:    this.sticker.id,
+            tasks: this.sticker.tasks.map(entry => {
+              return {
+                state:  entry.state,
+                text:   entry.text,
+                exists: true
+              }
+            })
+          };
+        }
+      },
+      isModified(index) {
+        if (this.sticker.title === '')
+          return false;
+        else
+
+        if (index === -1)
+          return this.sticker.title !== this.newData.title;
+        else if (index < this.sticker.tasks.length)
+          return this.sticker.tasks[index].text !== this.newData.tasks[index].text;
+        else
+          return false;
       }
     }
   }
@@ -156,6 +202,9 @@
       cursor: pointer;
       border-radius: 1rem;
       border: .1rem solid white;
+    }
+    .modified {
+      border-color: yellow;
     }
     button {
       margin-top: 1rem;
