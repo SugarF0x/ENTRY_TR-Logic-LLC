@@ -65,8 +65,17 @@
         <button class="discard"
                 @click="undo(-1)"
                 :disabled="!isModified(-1)"
+                v-if="!revertData.title"
+                title="Discard"
         >
           <
+        </button>
+        <button class="discard"
+                @click="revert(-1)"
+                v-else
+                title="Revert discard"
+        >
+          >
         </button>
       </label>
       <ul>
@@ -87,8 +96,17 @@
             <button class="discard"
                     @click="undo(i)"
                     :disabled="!isModified(i)"
+                    v-if="!revertData.tasks[i]"
+                    title="Discard"
             >
               <
+            </button>
+            <button class="discard"
+                    @click="revert(i)"
+                    v-else
+                    title="Revert discard"
+            >
+              >
             </button>
           </label>
           <div v-else
@@ -136,7 +154,7 @@
         default: () => {
           return {
             title: '',
-            id: Math.floor(Math.random()*100000).toString(),
+            id: Math.floor(Math.random()*1000000).toString(),
             tasks: [
               {
                 state: false,
@@ -164,6 +182,11 @@
               exists: true
             }
           })
+        },
+        revertData: {
+          title: '',
+          id:    '',
+          tasks: []
         }
       }
     },
@@ -230,6 +253,11 @@
               }
             })
           };
+          this.revertData = {
+            title: '',
+            id:    '',
+            tasks: []
+          };
         }
       },
       isModified(index) {
@@ -246,11 +274,30 @@
           return false;
       },
       undo(index) {
-        if (index === -1)
+        if (index === -1) {
+          this.revertData.title = this.newData.title;
           this.newData.title = this.sticker.title;
+        }
         else {
+          this.revertData.tasks[index] = {};
+          this.revertData.tasks[index].text   = this.newData.tasks[index].text;
+          this.revertData.tasks[index].state  = this.newData.tasks[index].state;
           this.newData.tasks[index].text  = this.sticker.tasks[index].text;
           this.newData.tasks[index].state = this.sticker.tasks[index].state || false;
+        }
+      },
+      revert(index) {
+        if (index === -1) {
+          this.newData.title = this.revertData.title;
+          this.revertData.title = '';
+        }
+        else {
+          this.newData.tasks[index].text  = this.revertData.tasks[index].text;
+          this.newData.tasks[index].state = this.revertData.tasks[index].state;
+          delete this.revertData.tasks[index];
+          this.revertData.tasks = this.revertData.tasks.filter(entry => {
+            return entry !== undefined;
+          })
         }
       }
     }
