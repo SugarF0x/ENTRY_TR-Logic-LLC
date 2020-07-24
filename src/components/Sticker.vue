@@ -312,6 +312,7 @@
     margin: 1rem;
     display: inline-block;
     min-width: 10rem;
+    max-width: 90vw;
     text-align: left;
     position: relative;
     .actions {
