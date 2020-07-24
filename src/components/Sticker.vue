@@ -1,40 +1,59 @@
 <template>
   <div class="sticker">
+    <Dialog :display="dialog.destroy"
+            @proceed="toDestroy"
+    />
+    <Dialog :display="dialog.discard"
+            @proceed="toDiscard"
+    />
 
     <!-- DISPLAY MODE -->
     <div v-if="!edit">
-      <Dialog :display="dialog" @proceed="toDestroy"></Dialog>
       <button class="destroy"
-              @click="dialog = true"
+              @click="dialog.destroy = true"
               title="Delete instance"
-      >X</button>
-      <h3>{{ sticker.title }}</h3>
+      >
+        X
+      </button>
+      <h3>
+        {{ sticker.title }}
+      </h3>
       <ul>
         <li v-for="(task, index) in sticker.tasks"
             :key="index"
             v-if="index < 3"
         >
           <label>
-            <input type="checkbox" :checked="task.state" disabled>
+            <input type="checkbox"
+                   :checked="task.state"
+                   disabled
+            >
             {{ task.text }}
           </label>
         </li>
       </ul>
-      <div v-if="sticker.tasks.length > 3" style="text-align: center">
+      <div v-if="sticker.tasks.length > 3"
+           style="text-align: center"
+      >
         <small>
           +{{ sticker.tasks.length - 3 }} more
         </small>
       </div>
-      <button class="edit" @click="modify">Edit</button>
+      <button class="edit"
+              @click="modify"
+      >
+        Edit
+      </button>
     </div>
 
     <!-- EDIT MODE -->
     <div v-else>
-      <Dialog :display="dialog" @proceed="toDiscard"></Dialog>
       <button class="destroy"
-              @click="dialog = true"
+              @click="dialog.destroy = true"
               title="Delete instance"
-      >X</button>
+      >
+        X
+      </button>
       <label>
         <input placeholder="title"
                v-model="newData.title"
@@ -45,19 +64,38 @@
       <ul>
         <li v-for="(v,i) in newData.tasks">
           <label v-if="v.exists">
-            <input type="checkbox" :checked="v.state">
-            <input placeholder="task" v-model="v.text" :class="{ modified: isModified(i) }">
-            <button class="discard" @click="discardTask(i)">X</button>
+            <input type="checkbox"
+                   :checked="v.state"
+            >
+            <input placeholder="task"
+                   v-model="v.text"
+                   :class="{ modified: isModified(i) }"
+            >
+            <button class="discard"
+                    @click="discardTask(i)"
+            >
+              X
+            </button>
           </label>
-          <div v-else style="text-align: center; margin: .5rem 0;">Deleted. Restore?</div>
+          <div v-else
+               style="text-align: center; margin: .5rem 0;"
+          >
+            Deleted. Restore?
+          </div>
         </li>
         <li style="text-align: center;">
-          <button @click="addTask">Add task</button>
+          <button @click="addTask">
+            Add task
+          </button>
         </li>
       </ul>
       <div class="actions">
-        <button @click="dialog=true">Discard</button>
-        <button>Accept</button>
+        <button @click="dialog.discard=true">
+          Discard
+        </button>
+        <button>
+          Accept
+        </button>
       </div>
     </div>
   </div>
@@ -98,7 +136,10 @@
     },
     data() {
       return {
-        dialog: false,
+        dialog: {
+          destroy: false,
+          discard: false
+        },
         newData: {
           title: this.sticker.title,
           id:    this.sticker.id,
@@ -135,13 +176,15 @@
 
       },
       toDestroy(val) {
-        this.dialog = false;
+        this.dialog.destroy = false;
         if (val) {
-          this.destroy()
+          this.destroy();
+          if (this.$router.currentRoute.name !== 'Home')
+            this.$router.push('/')
         }
       },
       toDiscard(val) {
-        this.dialog = false;
+        this.dialog.discard = false;
         if (val) {
           this.newData = {
             title: this.sticker.title,
