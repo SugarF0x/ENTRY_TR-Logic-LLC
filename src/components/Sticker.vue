@@ -112,7 +112,8 @@
           <div v-else
                style="text-align: center; margin: .5rem 0;"
           >
-            Deleted. Restore?
+            <span style="color: red">Deleted</span>
+            <button @click="v.exists = true" style="margin: 0 0 0 .5rem">restore</button>
           </div>
         </li>
         <li style="text-align: center;">
