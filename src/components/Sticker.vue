@@ -141,7 +141,8 @@
       justify-content: space-between;
     }
     .discard {
-      margin: 0 0 0 .5rem;
+      margin: 0;
+      padding: .3rem;
     }
     .edit {
       width: 100%;
@@ -163,7 +164,6 @@
       padding-left: 0;
       margin-bottom: 0;
       li {
-        text-align: center;
         margin: .1rem 0;
       }
     }
