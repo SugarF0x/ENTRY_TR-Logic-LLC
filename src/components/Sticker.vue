@@ -56,12 +56,18 @@
       >
         X
       </button>
-      <label>
+      <label style="display: flex">
         <input placeholder="title"
                v-model="newData.title"
-               style="width: 100%;"
+               style="flex: 1 0 auto;"
                :class="{ modified: isModified(-1) }"
         >
+        <button class="discard"
+                @click="undo(-1)"
+                :disabled="!isModified(-1)"
+        >
+          <
+        </button>
       </label>
       <ul>
         <li v-for="(v,i) in newData.tasks">
@@ -77,6 +83,12 @@
                     @click="discardTask(i)"
             >
               X
+            </button>
+            <button class="discard"
+                    @click="undo(i)"
+                    :disabled="!isModified(i)"
+            >
+              <
             </button>
           </label>
           <div v-else
@@ -228,9 +240,18 @@
         if (index === -1)
           return this.sticker.title !== this.newData.title;
         else if (index < this.sticker.tasks.length)
-          return this.sticker.tasks[index].text !== this.newData.tasks[index].text;
+          return (this.sticker.tasks[index].text !== this.newData.tasks[index].text
+               || this.sticker.tasks[index].state !== this.newData.tasks[index].state);
         else
           return false;
+      },
+      undo(index) {
+        if (index === -1)
+          this.newData.title = this.sticker.title;
+        else {
+          this.newData.tasks[index].text  = this.sticker.tasks[index].text;
+          this.newData.tasks[index].state = this.sticker.tasks[index].state || false;
+        }
       }
     }
   }
@@ -268,7 +289,8 @@
       border: .1rem solid white;
     }
     .modified {
-      border-color: yellow;
+      border-color: yellowgreen;
+      background-color: rgba(250,250,250,.5);
     }
     button {
       margin-top: 1rem;
