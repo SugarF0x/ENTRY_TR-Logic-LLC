@@ -20,9 +20,11 @@
           </label>
         </li>
       </ul>
-      <small v-if="sticker.tasks.length > 3">
-        More...
-      </small>
+      <div v-if="sticker.tasks.length > 3" style="text-align: center">
+        <small>
+          +{{ sticker.tasks.length - 3 }} more
+        </small>
+      </div>
       <button class="edit" @click="modify">Edit</button>
     </div>
 
