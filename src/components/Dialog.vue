@@ -1,7 +1,7 @@
 <template>
   <div class="wrapper" v-if="display">
     <div class="card">
-      <h3>Are you sure you want to delete this?</h3>
+      <h3>{{ message }}</h3>
       <div class="actions">
         <button @click="abort">Abort</button>
         <button @click="proceed">Proceed</button>
@@ -21,7 +21,8 @@
   export default {
     name: "Dialog",
     props: {
-      display: Boolean
+      display: Boolean,
+      message: String
     },
     methods: {
       abort() {

@@ -1,9 +1,11 @@
 <template>
   <div class="sticker">
     <Dialog :display="dialog.destroy"
+            message="Are you sure you want to delete this list?"
             @proceed="toDestroy"
     />
     <Dialog :display="dialog.discard"
+            message="Are you sure you want to discard changes?"
             @proceed="toDiscard"
     />
 
